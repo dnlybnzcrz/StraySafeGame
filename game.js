@@ -123,6 +123,8 @@ function spawnItems() {
   this.time.addEvent({ delay: baseDelay - delayDecrease, callback: spawnItems, callbackScope: this, loop: true });
 }
 
+let lastSpinScore = 0;
+
 function catchFood(player, food) {
   food.destroy();
   score += 10;
@@ -130,6 +132,28 @@ function catchFood(player, food) {
   if (score > highScore) {
     highScore = score;
     highScoreText.setText('High Score: ' + highScore);
+  }
+
+  // Spin the cat every 50 points, prevent repeated spins at same score
+  if (score % 50 === 0 && score !== lastSpinScore) {
+    lastSpinScore = score;
+    // Spin the player by rotating 360 degrees multiple times
+    const spinDuration = 400; // total duration in ms
+    const spinCount = 4; // number of full rotations
+
+    let elapsed = 0;
+    const spinEvent = player.scene.time.addEvent({
+      delay: 16, // approx 60fps
+      loop: true,
+      callback: () => {
+        elapsed += 16;
+        player.rotation = (elapsed / spinDuration) * spinCount * 2 * Math.PI;
+        if (elapsed >= spinDuration) {
+          player.rotation = 0; // reset rotation
+          spinEvent.remove();
+        }
+      }
+    });
   }
 }
 
