@@ -17,7 +17,7 @@ let traps;
 let cursors;
 let score = 0;
 let scoreText;
-let lives = 3;
+let lives = 2;
 let livesText;
 let gameOver = false;
 let gameStarted = false;
@@ -51,7 +51,7 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
 
   scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: 'Arial', fontSize: '28px', fill: 'black' });
-  livesText = this.add.text(16, 50, 'Lives: 3', { fontFamily: 'Arial', fontSize: '28px', fill: 'black' });
+  livesText = this.add.text(16, 50, 'Lives: 2', { fontFamily: 'Arial', fontSize: '28px', fill: 'black' });
   highScoreText = this.add.text(600, 16, 'High Score: 0', { fontFamily: 'Arial', fontSize: '28px', fill: 'black' });
 
   // Create a modal background for the start menu
@@ -174,7 +174,7 @@ function hitTrap(player, trap) {
     restartText.setOrigin(0.5);
 
     this.input.keyboard.once('keydown-SPACE', () => {
-      lives = 3;
+      lives = 2;
       score = 0;
       gameOver = false;
       this.scene.restart();
