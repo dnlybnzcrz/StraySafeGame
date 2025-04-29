@@ -95,7 +95,15 @@ function spawnItems() {
   // Increase difficulty by increasing falling speed and spawn rate as score increases
   const baseFoodSpeed = 200;
   const baseTrapSpeed = 250;
-  const speedIncrease = Math.min(score / 2, 300); // Cap speed increase to avoid excessive speed
+
+  // Increase speed more significantly at 1000 and 2000 points
+  let speedIncrease = Math.min(score / 2, 300); // default speed increase cap
+  if (score >= 2000) {
+    speedIncrease = 600; // much faster after 2000 points
+  } else if (score >= 1000) {
+    speedIncrease = 400; // faster after 1000 points
+  }
+
   const baseDelay = 800;
   const minDelay = 300;
   const delayDecrease = Math.min(score * 5, baseDelay - minDelay);
@@ -178,6 +186,8 @@ function hitTrap(player, trap) {
       score = 0;
       gameOver = false;
       this.scene.restart();
+      // Update high score text after restart to keep it visible
+      highScoreText.setText('High Score: ' + highScore);
     });
   }
 }
