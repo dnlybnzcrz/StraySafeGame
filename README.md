@@ -42,7 +42,7 @@ A fun and challenging browser-based game where you play as a stray cat trying to
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/[your-username]/StraySafeGame.git
+   git clone https://github.com/dnlybnzcrz/StraySafeGame.git
    ```
 2. Open `index.html` in your web browser
 3. No additional setup required!
